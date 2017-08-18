@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfesorApp.Paginas.PaginaListaTareasAlumnos">
+    <ScrollView>
+        <StackLayout>
+            <ActivityIndicator x:Name="activityIndicator" Color="Blue"/>
+            <ListView x:Name="lsvTareasAlumnos" ItemSelected="lsvTareasAlumnos_ItemSelected" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="White" Spacing="5" Padding="5">
+                                <Label Text="{Binding MensajeCorto}" LineBreakMode="WordWrap" FontSize="15" TextColor="#030303" HorizontalOptions="Start" Margin="12,5,12,1" HorizontalTextAlignment="Start"/>
+                                <Label Text="{Binding FechaRespuestaDate}" LineBreakMode="WordWrap" FontSize="15" TextColor="#030303" HorizontalOptions="Start" Margin="12,5,12,1" HorizontalTextAlignment="Start"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Calificacion}" LineBreakMode="WordWrap" FontSize="15" TextColor="#030303" HorizontalOptions="Start" Margin="12,5,12,1" HorizontalTextAlignment="Start"/>
+                                    <Label Text="{Binding EvaluadoString}" LineBreakMode="WordWrap" FontSize="15" TextColor="#030303" HorizontalOptions="Start" Margin="12,5,12,1" HorizontalTextAlignment="Start"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

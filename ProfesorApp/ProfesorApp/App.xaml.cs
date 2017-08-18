@@ -13,7 +13,7 @@ namespace ProfesorApp
         {
             InitializeComponent();
 
-            MainPage = new ProfesorApp.MainPage();
+            MainPage = new NavigationPage(new Paginas.PaginaMenu());
         }
 
         protected override void OnStart()

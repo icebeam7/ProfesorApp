@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfesorApp.Paginas.PaginaDetalleAlumno">
+    <StackLayout Padding="10" Spacing="10" BackgroundColor="White">
+        <Image Source="{Binding FotoURLSAS}" WidthRequest="200" HeightRequest="200" Aspect="AspectFit" HorizontalOptions="Center" />
+
+        <Label Text="Nombre:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
+        <Entry Text="{Binding Nombre}" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+
+        <Label Text="Usuario:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
+        <Entry Text="{Binding Usuario}" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+
+        <Label Text="Password:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
+        <Entry Text="{Binding Password}" IsPassword="True" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+        
+        <ActivityIndicator x:Name="activityIndicator" Color="Blue" Margin="10"/>
+    </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Guardar" Text="Guardar" Order="Primary" Priority="0" Clicked="Guardar_Clicked"/>
+        <ToolbarItem x:Name="Eliminar" Text="Eliminar" Order="Primary" Priority="1" Clicked="Eliminar_Clicked"/>
+    </ContentPage.ToolbarItems>
+</ContentPage>
