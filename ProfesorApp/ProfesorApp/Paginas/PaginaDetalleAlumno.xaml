@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfesorApp.Paginas.PaginaDetalleAlumno">
     <StackLayout Padding="10" Spacing="10" BackgroundColor="White">
-        <Image Source="{Binding FotoURLSAS}" WidthRequest="200" HeightRequest="200" Aspect="AspectFit" HorizontalOptions="Center" />
+        <Image Source="{Binding FotoURLSAS}" Style="{StaticResource FotoAlumno}"/>
 
-        <Label Text="Nombre:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-        <Entry Text="{Binding Nombre}" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+        <Label Text="Nombre:" Style="{StaticResource LabelTitulo}"/>
+        <Entry Text="{Binding Nombre}"  Style="{StaticResource CajaTexto}"/>
 
-        <Label Text="Usuario:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-        <Entry Text="{Binding Usuario}" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+        <Label Text="Usuario:" Style="{StaticResource LabelTitulo}"/>
+        <Entry Text="{Binding Usuario}"  Style="{StaticResource CajaTexto}"/>
 
-        <Label Text="Password:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-        <Entry Text="{Binding Password}" IsPassword="True" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
-        
-        <ActivityIndicator x:Name="activityIndicator" Color="Blue" Margin="10"/>
+        <Label Text="Password:" Style="{StaticResource LabelTitulo}"/>
+        <Entry Text="{Binding Password}" IsPassword="True" Style="{StaticResource CajaTexto}"/>
+
+        <ActivityIndicator x:Name="activityIndicator" Style="{StaticResource Indicador}"/>
     </StackLayout>
 
     <ContentPage.ToolbarItems>

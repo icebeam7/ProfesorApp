@@ -4,8 +4,8 @@
              x:Class="ProfesorApp.Paginas.PaginaListaTareas">
     <ScrollView>
         <StackLayout>
-            <ActivityIndicator x:Name="activityIndicator" Color="Blue"/>
-            <ListView x:Name="lsvTareas" ItemSelected="lsvTareas_ItemSelected">
+            <ActivityIndicator x:Name="activityIndicator" Style="{StaticResource Indicador}"/>
+            <ListView x:Name="lsvTareas" ItemSelected="lsvTareas_ItemSelected" Style="{StaticResource Lista}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Titulo}" TextColor="Blue" />

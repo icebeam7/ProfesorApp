@@ -3,6 +3,7 @@ using ProfesorApp.Servicios;
 using ProfesorApp.Clases;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Threading.Tasks;
 
 namespace ProfesorApp.Paginas
 {
@@ -21,16 +22,30 @@ namespace ProfesorApp.Paginas
             activityIndicator.IsVisible = estado;
         }
 
+        private async Task ObtenerTareasAlumnos()
+        {
+            ActualizarActivityIndicator(true);
+            lsvTareasAlumnos.ItemsSource = await ServicioWebApi.GetTareaAlumnosByEval(switchTareaEvaluada.IsToggled);
+            ActualizarActivityIndicator(false);
+        }
+
+        private async void switchTareaEvaluada_Toggled(object sender, ToggledEventArgs e)
+        {
+            await ObtenerTareasAlumnos();
+        }
+
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            ActualizarActivityIndicator(true);
+            try
+            {
+                await ObtenerTareasAlumnos();
+            }
+            catch(Exception ex)
+            {
 
-            var servicioWebApi = new ServicioWebApi();
-            lsvTareasAlumnos.ItemsSource = await servicioWebApi.GetTareaAlumnos();
-
-            ActualizarActivityIndicator(false);
+            }
         }
 
         private async void lsvTareasAlumnos_ItemSelected(object sender, SelectedItemChangedEventArgs e)

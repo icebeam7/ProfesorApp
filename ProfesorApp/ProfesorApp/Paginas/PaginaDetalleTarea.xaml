@@ -1,25 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Convertidor="clr-namespace:ProfesorApp.Converters"
              x:Class="ProfesorApp.Paginas.PaginaDetalleTarea">
+
     <StackLayout Padding="10" Spacing="10" BackgroundColor="White">
-        <Label Text="Titulo:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-        <Entry Text="{Binding Titulo}" HorizontalOptions="FillAndExpand" FontSize="20" TextColor="White" BackgroundColor="Black" Margin="10,0" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+        <Label Text="Titulo:" Style="{StaticResource LabelTitulo}"/>
+        <Entry Text="{Binding Titulo}" Style="{StaticResource CajaTexto}"/>
 
-        <Label Text="Fecha límite:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-        <DatePicker Date="{Binding FechaLimite}" Format="dd/MM/yyyy" BackgroundColor="White" TextColor="Black" Margin="10,0"/>
+        <Label Text="Fecha límite:" Style="{StaticResource LabelTitulo}"/>
+        <DatePicker Date="{Binding FechaLimite}" Style="{StaticResource SelectorFecha}"/>
 
-        <Label Text="Fecha publicación:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-        <Label Text="{Binding FechaPublicacionDate}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="12,0" HorizontalTextAlignment="Start"/>
+        <Label Text="Fecha publicación:" Style="{StaticResource LabelTitulo}"/>
+        <Label Text="{Binding FechaPublicacion, Converter={StaticResource ConvertidorFecha}}"  Style="{StaticResource LabelNormal}"/>
 
-        <Button x:Name="btnArchivo" Text="Seleccionar archivo" HorizontalOptions="Center" TextColor="Black" BackgroundColor="White" Clicked="btnArchivo_Clicked" FontAttributes="Bold" FontSize="20" BorderColor="Black" BorderWidth="10"/>
-
-        <ActivityIndicator x:Name="activityIndicator" Color="Blue" Margin="10"/>
+        <ActivityIndicator x:Name="activityIndicator" Style="{StaticResource Indicador}"/>
     </StackLayout>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Guardar" Text="Guardar" Order="Primary" Priority="0" Clicked="Guardar_Clicked"/>
-        <ToolbarItem x:Name="Eliminar" Text="Eliminar" Order="Primary" Priority="1" Clicked="Eliminar_Clicked"/>
-        <ToolbarItem x:Name="Ver" Text="Archivo" Order="Primary" Priority="2" Clicked="Ver_Clicked"/>
+        <ToolbarItem x:Name="Archivo" Text="Archivo" Order="Primary" Priority="0" Clicked="Archivo_Clicked"/>
+        <ToolbarItem x:Name="Guardar" Text="Guardar" Order="Primary" Priority="1" Clicked="Guardar_Clicked"/>
+        <ToolbarItem x:Name="Eliminar" Text="Eliminar" Order="Primary" Priority="2" Clicked="Eliminar_Clicked"/>
+        <ToolbarItem x:Name="Ver" Text="Archivo" Order="Primary" Priority="3" Clicked="Ver_Clicked"/>
     </ContentPage.ToolbarItems>
 </ContentPage>

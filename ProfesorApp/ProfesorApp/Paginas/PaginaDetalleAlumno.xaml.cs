@@ -34,15 +34,13 @@ namespace ProfesorApp.Paginas
         {
             ActualizarActivityIndicator(true);
 
-            var servicioWebApi = new ServicioWebApi();
-
             if (dato.Id == 0)
             {
-                dato = await servicioWebApi.AddAlumno(dato);
+                dato = await ServicioWebApi.AddAlumno(dato);
             }
             else
             {
-                await servicioWebApi.UpdateAlumno(dato);
+                await ServicioWebApi.UpdateAlumno(dato);
             }
 
             ActualizarActivityIndicator(false);
@@ -58,10 +56,7 @@ namespace ProfesorApp.Paginas
                 if (await DisplayAlert("Eliminar", "¿Deseas eliminar el registro?", "Si", "No"))
                 {
                     ActualizarActivityIndicator(true);
-
-                    var servicioWebApi = new ServicioWebApi();
-                    await servicioWebApi.DeleteAlumno(dato.Id);
-
+                    await ServicioWebApi.DeleteAlumno(dato.Id);
                     ActualizarActivityIndicator(false);
 
                     await DisplayAlert("Información", "Dato eliminado con éxito", "OK");

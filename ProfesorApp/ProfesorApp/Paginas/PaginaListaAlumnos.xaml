@@ -4,8 +4,8 @@
              x:Class="ProfesorApp.Paginas.PaginaListaAlumnos">
     <ScrollView>
         <StackLayout>
-            <ActivityIndicator x:Name="activityIndicator" Color="Blue"/>
-            <ListView x:Name="lsvAlumnos" ItemSelected="lsvAlumnos_ItemSelected">
+            <ActivityIndicator x:Name="activityIndicator" Style="{StaticResource Indicador}"/>
+            <ListView x:Name="lsvAlumnos" ItemSelected="lsvAlumnos_ItemSelected" Style="{StaticResource Lista}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding FotoURLSAS}" Text="{Binding Nombre}" TextColor="Blue"/>

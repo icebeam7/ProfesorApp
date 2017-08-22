@@ -5,39 +5,39 @@
 
     <ScrollView>
         <StackLayout Padding="10" Spacing="10" BackgroundColor="White">
-            <ActivityIndicator x:Name="activityIndicator" Color="Blue" Margin="10"/>
+            <ActivityIndicator x:Name="activityIndicator" Style="{StaticResource Indicador}"/>
 
-            <Label Text="{Binding Tarea.Titulo}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
-
-            <StackLayout Orientation="Horizontal">
-                <Image Source="{Binding FotoURLSAS}" WidthRequest="150" HeightRequest="150" Aspect="AspectFit" HorizontalOptions="Center" />
-                <Label Text="{Binding Alumno.Nombre}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="12,0" VerticalOptions="Center"/>
-            </StackLayout>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
-            
-            <Label Text="Mensaje del alumno:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-            <Label Text="{Binding Mensaje}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="12,0" HorizontalTextAlignment="Start"/>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
+            <Label Text="{Binding Tarea.Titulo}" Style="{StaticResource LabelTitulo}" />
+            <BoxView Style="{StaticResource Linea}"/>
 
             <StackLayout Orientation="Horizontal">
-                <Label Text="Fecha límite:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-                <Label Text="{Binding Tarea.FechaLimiteDate}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="12,0" HorizontalTextAlignment="Start"/>
+                <Image Source="{Binding FotoURLSAS}" Style="{StaticResource FotoAlumno}"/>
+                <Label Text="{Binding Alumno.Nombre}" Style="{StaticResource LabelNormal}" />
             </StackLayout>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
+            <BoxView Style="{StaticResource Linea}"/>
+
+            <Label Text="Mensaje del alumno:" Style="{StaticResource LabelTitulo}"/>
+            <Label Text="{Binding Mensaje}" Style="{StaticResource LabelNormal}"/>
+            <BoxView Style="{StaticResource Linea}"/>
 
             <StackLayout Orientation="Horizontal">
-                <Label Text="Fecha respuesta:" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-                <Label Text="{Binding FechaRespuestaDate}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="12,0" HorizontalTextAlignment="Start"/>
+                <Label Text="Fecha límite:" Style="{StaticResource LabelTitulo}"/>
+                <Label Text="{Binding Tarea.FechaLimite, Converter={StaticResource ConvertidorFecha}}" Style="{StaticResource LabelNormal}"/>
             </StackLayout>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
+            <BoxView Style="{StaticResource Linea}"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Fecha respuesta:" Style="{StaticResource LabelTitulo}"/>
+                <Label Text="{Binding Fecha, Converter={StaticResource ConvertidorFecha}}"  Style="{StaticResource LabelNormal}"/>
+            </StackLayout>
+            <BoxView Style="{StaticResource Linea}"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="Calificacion:" FontSize="Medium" TextColor="Black" Margin="10" />
-                <Label BindingContext="{x:Reference Name=sliderCalificacion}" Text="{Binding Path=Value}" FontSize="20" TextColor="Black" HorizontalOptions="Start" Margin="10" HorizontalTextAlignment="Start"/>
-                <Slider x:Name="sliderCalificacion" Value="{Binding Calificacion}" Minimum="0" Maximum="100" Margin="10" HorizontalOptions="FillAndExpand"/>
+                <Label Text="Calificacion:" Style="{StaticResource LabelTitulo}" />
+                <Label BindingContext="{x:Reference Name=sliderCalificacion}" Text="{Binding Path=Value}"  Style="{StaticResource LabelNormal}"/>
+                <Slider x:Name="sliderCalificacion" Value="{Binding Calificacion}" Style="{StaticResource SliderCalificacion}" />
             </StackLayout>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
+            <BoxView Style="{StaticResource Linea}"/>
         </StackLayout>
     </ScrollView>
 

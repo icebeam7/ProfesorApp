@@ -23,9 +23,7 @@ namespace ProfesorApp.Paginas
             base.OnAppearing();
 
             ActualizarActivityIndicator(true);
-
-            ServicioWebApi servicioWebApi = new ServicioWebApi();
-            dato = await servicioWebApi.GetTareaAlumno(dato.IdTarea, dato.IdAlumno);
+            dato = await ServicioWebApi.GetTareaAlumno(dato.IdTarea, dato.IdAlumno);
             this.BindingContext = dato;
 
             ActualizarActivityIndicator(false);
@@ -43,10 +41,7 @@ namespace ProfesorApp.Paginas
             ActualizarActivityIndicator(true);
 
             dato.Evaluado = true;
-
-            var servicioWebApi = new ServicioWebApi();
-            await servicioWebApi.UpdateTareaAlumno(dato);
-
+            await ServicioWebApi.UpdateTareaAlumno(dato);
             ActualizarActivityIndicator(false);
 
             await DisplayAlert("Información", "Dato registrado con éxito", "OK");

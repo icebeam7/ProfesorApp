@@ -10,13 +10,13 @@ using System.Net;
 
 namespace ProfesorApp.Servicios
 {
-    public class ServicioWebApi
+    public static class ServicioWebApi
     {
-        const string WebApiURL = "este valor lo debes establecer";
+        const string WebApiURL = "https://alumnosweb-luisb.azurewebsites.net";
 
         private static HttpClient Cliente = new HttpClient();
 
-        public async Task<List<Alumno>> GetAlumnos()
+        public static async Task<List<Alumno>> GetAlumnos()
         {
             List<Alumno> datos = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -41,7 +41,7 @@ namespace ProfesorApp.Servicios
             return datos;
         }
 
-        public async Task<Alumno> GetAlumno(int id)
+        public static async Task<Alumno> GetAlumno(int id)
         {
             Alumno dato = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -59,7 +59,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<Alumno> AddAlumno(Alumno info)
+        public static async Task<Alumno> AddAlumno(Alumno info)
         {
             Alumno dato = null;
             Cliente.BaseAddress = new Uri(WebApiURL);
@@ -79,7 +79,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<Alumno> UpdateAlumno(Alumno info)
+        public static async Task<Alumno> UpdateAlumno(Alumno info)
         {
             Alumno dato = null;
             Cliente.BaseAddress = new Uri(WebApiURL);
@@ -99,7 +99,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<bool> DeleteAlumno(int id)
+        public static async Task<bool> DeleteAlumno(int id)
         {
             Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -110,7 +110,7 @@ namespace ProfesorApp.Servicios
             return respuesta.IsSuccessStatusCode;
         }
 
-        public async Task<List<Tarea>> GetTareas()
+        public static async Task<List<Tarea>> GetTareas()
         {
             List<Tarea> datos = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -128,7 +128,7 @@ namespace ProfesorApp.Servicios
             return datos;
         }
 
-        public async Task<Tarea> GetTarea(int id)
+        public static async Task<Tarea> GetTarea(int id)
         {
             Tarea dato = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -146,7 +146,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<Tarea> AddTarea(Tarea info)
+        public static async Task<Tarea> AddTarea(Tarea info)
         {
             Tarea dato = null;
             Cliente.BaseAddress = new Uri(WebApiURL);
@@ -166,7 +166,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<Tarea> UpdateTarea(Tarea info)
+        public static async Task<Tarea> UpdateTarea(Tarea info)
         {
             Tarea dato = null;
             Cliente.BaseAddress = new Uri(WebApiURL);
@@ -186,7 +186,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<bool> DeleteTarea(int id)
+        public static async Task<bool> DeleteTarea(int id)
         {
             Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -197,13 +197,13 @@ namespace ProfesorApp.Servicios
             return respuesta.IsSuccessStatusCode;
         }
 
-        public async Task<List<TareaAlumno>> GetTareaAlumnos()
+        public static async Task<List<TareaAlumno>> GetTareaAlumnosByEval(bool evaluado)
         {
             List<TareaAlumno> datos = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var url = $"{WebApiURL}/api/TareaAlumnos/";
+            var url = $"{WebApiURL}/api/TareaAlumnos/GetTareaAlumnosByEval/{evaluado}";
             var respuesta = await Cliente.GetAsync(url);
 
             if (respuesta.StatusCode == HttpStatusCode.OK)
@@ -215,7 +215,7 @@ namespace ProfesorApp.Servicios
             return datos;
         }
 
-        public async Task<TareaAlumno> GetTareaAlumno(int idTarea, int idAlumno)
+        public static async Task<TareaAlumno> GetTareaAlumno(int idTarea, int idAlumno)
         {
             TareaAlumno dato = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
@@ -233,7 +233,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<TareaAlumno> AddTareaAlumno(TareaAlumno info)
+        public static async Task<TareaAlumno> AddTareaAlumno(TareaAlumno info)
         {
             TareaAlumno dato = null;
             Cliente.BaseAddress = new Uri(WebApiURL);
@@ -253,7 +253,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<TareaAlumno> UpdateTareaAlumno(TareaAlumno info)
+        public static async Task<TareaAlumno> UpdateTareaAlumno(TareaAlumno info)
         {
             TareaAlumno dato = null;
             Cliente.BaseAddress = new Uri(WebApiURL);
@@ -273,7 +273,7 @@ namespace ProfesorApp.Servicios
             return dato;
         }
 
-        public async Task<bool> DeleteTareaAlumno(int idTarea, int idAlumno)
+        public static async Task<bool> DeleteTareaAlumno(int idTarea, int idAlumno)
         {
             Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();

@@ -41,6 +41,9 @@
     <Compile Include="Clases\Alumno.cs" />
     <Compile Include="Clases\Tarea.cs" />
     <Compile Include="Clases\TareaAlumno.cs" />
+    <Compile Include="Converters\ConvertidorEvaluacionTarea.cs" />
+    <Compile Include="Converters\ConvertidorFecha.cs" />
+    <Compile Include="Converters\ConvertidorMensajeCorto.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

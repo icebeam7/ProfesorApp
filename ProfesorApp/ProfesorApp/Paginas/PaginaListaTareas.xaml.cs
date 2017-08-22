@@ -26,10 +26,7 @@ namespace ProfesorApp.Paginas
             base.OnAppearing();
 
             ActualizarActivityIndicator(true);
-
-            var servicioWebApi = new ServicioWebApi();
-            lsvTareas.ItemsSource = await servicioWebApi.GetTareas();
-
+            lsvTareas.ItemsSource = await ServicioWebApi.GetTareas();
             ActualizarActivityIndicator(false);
         }
 

@@ -32,7 +32,7 @@ namespace ProfesorApp.Paginas
             activityIndicator.IsVisible = estado;
         }
 
-        private async void btnArchivo_Clicked(object sender, EventArgs e)
+        private async void Archivo_Clicked(object sender, EventArgs e)
         {
             ServicioFilePicker servicioFilePicker = new ServicioFilePicker();
             stream = await servicioFilePicker.GetFile();
@@ -40,23 +40,30 @@ namespace ProfesorApp.Paginas
 
         private async void Guardar_Clicked(object sender, EventArgs e)
         {
-            ActualizarActivityIndicator(true);
-
-            var servicioStorage = new ServicioStorage();
-            var servicioWebApi = new ServicioWebApi();
-
-            if (dato.Id == 0)
+            if (stream != null || dato.Id > 0)
             {
-                dato = await servicioWebApi.AddTarea(dato);
+                ActualizarActivityIndicator(true);
+
+                if (dato.Id == 0)
+                    dato = await ServicioWebApi.AddTarea(dato);
+
+                if (stream != null)
+                {
+                    var servicioStorage = new ServicioStorage();
+                    dato.ArchivoURL = await servicioStorage.UploadTarea(dato.Id, stream);
+                }
+
+                await ServicioWebApi.UpdateTarea(dato);
+
+                ActualizarActivityIndicator(false);
+
+                await DisplayAlert("Información", "Dato registrado con éxito", "OK");
+                await Navigation.PopAsync();
             }
-
-            dato.ArchivoURL = await servicioStorage.UploadTarea(dato.Id, stream);
-            await servicioWebApi.UpdateTarea(dato);
-
-            ActualizarActivityIndicator(false);
-
-            await DisplayAlert("Información", "Dato registrado con éxito", "OK");
-            await Navigation.PopAsync();
+            else
+            {
+                await DisplayAlert("Información", "Debes agregar un archivo primero", "OK");
+            }
         }
 
         private async void Eliminar_Clicked(object sender, EventArgs e)
@@ -66,10 +73,7 @@ namespace ProfesorApp.Paginas
                 if (await DisplayAlert("Eliminar", "¿Deseas eliminar el registro?", "Si", "No"))
                 {
                     ActualizarActivityIndicator(true);
-
-                    var servicioWebApi = new ServicioWebApi();
-                    await servicioWebApi.DeleteTarea(dato.Id);
-
+                    await ServicioWebApi.DeleteTarea(dato.Id);
                     ActualizarActivityIndicator(false);
 
                     await DisplayAlert("Información", "Dato eliminado con éxito", "OK");
@@ -87,5 +91,6 @@ namespace ProfesorApp.Paginas
                 //var stream = await servicioStorage.DownloadTarea(dato.Id);
             }
         }
+
     }
 }
