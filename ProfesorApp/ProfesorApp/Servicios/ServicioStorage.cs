@@ -7,11 +7,47 @@ namespace ProfesorApp.Servicios
 {
     public class ServicioStorage
     {
-        const string StorageURL = "este valor lo debes establecer";
+        const string StorageURL = "establecer este valor";
+        const string SASQueryString = "establecer este valor";
         const string ContainerAlumno = "alumnos";
         const string ContainerTarea = "tareas-asignadas";
         const string ContainerTareaAlumno = "tareas-alumnos";
-        const string SASQueryString = "este valor lo debes establecer";
+
+        private async Task<string> UploadBlob(string blobSAS, Stream stream)
+        {
+            string url = "";
+            try
+            {
+                CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobSAS));
+
+                using (stream)
+                {
+                    await blob.UploadFromStreamAsync(stream);
+                    url = blob.StorageUri.PrimaryUri.AbsoluteUri;
+                }
+            }
+            catch (Exception exc)
+            {
+                string msgError = exc.Message;
+            }
+            return url;
+        }
+
+        private async Task<Stream> DownloadBlob(string blobSAS)
+        {
+            try
+            {
+                CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobSAS));
+                MemoryStream stream = new MemoryStream();
+                await blob.DownloadToStreamAsync(stream);
+                return stream;
+            }
+            catch (Exception exc)
+            {
+                string msgError = exc.Message;
+                return null;
+            }
+        }
 
         public async Task<string> UploadTarea(int id, Stream stream)
         {
@@ -31,6 +67,18 @@ namespace ProfesorApp.Servicios
             return await DownloadBlob(blobSAS);
         }
 
+        public async Task<Stream> DownloadTarea(int id)
+        {
+            string blobSAS = $"{StorageURL}/{ContainerTarea}/{id}.pdf{SASQueryString}";
+            return await DownloadBlob(blobSAS);
+        }
+
+        public async Task<Stream> DownloadTareaAlumnos(int idTarea, int idAlumno)
+        {
+            string blobSAS = $"{StorageURL}/{ContainerTareaAlumno}/{idTarea}_{idAlumno}.pdf{SASQueryString}";
+            return await DownloadBlob(blobSAS);
+        }
+
         public string GetFullDownloadTareaURL(int id)
         {
             return $"{StorageURL}/{ContainerTarea}/{id}.pdf{SASQueryString}";
@@ -46,54 +94,5 @@ namespace ProfesorApp.Servicios
             return $"{StorageURL}/{ContainerTareaAlumno}/{idTarea}_{idAlumno}.pdf{SASQueryString}";
         }
 
-        public async Task<Stream> DownloadTarea(int id)
-        {
-            string blobSAS = $"{StorageURL}/{ContainerTarea}/{id}.pdf{SASQueryString}";
-            return await DownloadBlob(blobSAS);
-        }
-
-        public async Task<Stream> DownloadTareaAlumnos(int idTarea, int idAlumno)
-        {
-            string blobSAS = $"{StorageURL}/{ContainerTareaAlumno}/{idTarea}_{idAlumno}.pdf{SASQueryString}";
-            return await DownloadBlob(blobSAS);
-        }
-
-        private async Task<Stream> DownloadBlob(string blobSAS)
-        {
-            try
-            {
-                CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobSAS));
-                MemoryStream stream = new MemoryStream();
-                await blob.DownloadToStreamAsync(stream);
-                return stream;
-            }
-            catch (Exception exc)
-            {
-                string msgError = exc.Message;
-                return null;
-            }
-        }
-
-        private async Task<string> UploadBlob(string blobSAS, Stream stream)
-        {
-            string url = "";
-
-            try
-            {
-                CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobSAS));
-
-                using (stream)
-                {
-                    await blob.UploadFromStreamAsync(stream);
-                    url = blob.StorageUri.PrimaryUri.AbsoluteUri;
-                }
-            }
-            catch (Exception exc)
-            {
-                string msgError = exc.Message;
-            }
-
-            return url;
-        }
     }
 }

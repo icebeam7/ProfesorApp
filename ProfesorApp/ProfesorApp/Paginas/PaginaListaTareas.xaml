@@ -8,7 +8,8 @@
             <ListView x:Name="lsvTareas" ItemSelected="lsvTareas_ItemSelected" Style="{StaticResource Lista}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Titulo}" TextColor="Blue" />
+                        <TextCell Text="{Binding Titulo}" TextColor="Blue" 
+                                  Detail="{Binding FechaLimite, Converter={StaticResource ConvertidorFecha}}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

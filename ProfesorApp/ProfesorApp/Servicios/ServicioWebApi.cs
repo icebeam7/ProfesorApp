@@ -10,11 +10,11 @@ using System.Net;
 
 namespace ProfesorApp.Servicios
 {
-    public static class ServicioWebApi
+    public class ServicioWebApi
     {
-        const string WebApiURL = "https://alumnosweb-luisb.azurewebsites.net";
+        const string WebApiURL = "establecer este valor";
 
-        private static HttpClient Cliente = new HttpClient();
+        private static HttpClient Cliente = new HttpClient() { BaseAddress = new Uri(WebApiURL) };
 
         public static async Task<List<Alumno>> GetAlumnos()
         {
@@ -62,49 +62,45 @@ namespace ProfesorApp.Servicios
         public static async Task<Alumno> AddAlumno(Alumno info)
         {
             Alumno dato = null;
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/Alumnos/";
             var jsonContent = JsonConvert.SerializeObject(info);
-            var respuesta = await Cliente.PostAsync(url, new StringContent(jsonContent.ToString(), Encoding.UTF8, "application/json"));
 
-            //if (respuesta.StatusCode == HttpStatusCode.Created)
+            var respuesta = await Cliente.PostAsync(url,
+                new StringContent(jsonContent,
+                Encoding.UTF8,
+                "application/json"));
+
+            if (respuesta.StatusCode == HttpStatusCode.Created)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<Alumno>(json);
             }
-
             return dato;
         }
 
         public static async Task<Alumno> UpdateAlumno(Alumno info)
         {
             Alumno dato = null;
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/Alumnos/{info.Id}";
             var jsonContent = JsonConvert.SerializeObject(info);
-            var respuesta = await Cliente.PutAsync(url, new StringContent(jsonContent.ToString(), Encoding.UTF8, "application/json"));
+            var respuesta = await Cliente.PutAsync(url, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
 
             //if (respuesta.StatusCode == HttpStatusCode.Created)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<Alumno>(json);
             }
-
             return dato;
         }
 
         public static async Task<bool> DeleteAlumno(int id)
         {
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/Alumnos/{id}";
             var respuesta = await Cliente.DeleteAsync(url);
             return respuesta.IsSuccessStatusCode;
@@ -115,16 +111,13 @@ namespace ProfesorApp.Servicios
             List<Tarea> datos = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"{WebApiURL}/api/Tareas/";
             var respuesta = await Cliente.GetAsync(url);
-
             if (respuesta.StatusCode == HttpStatusCode.OK)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 datos = JsonConvert.DeserializeObject<List<Tarea>>(json);
             }
-
             return datos;
         }
 
@@ -133,65 +126,52 @@ namespace ProfesorApp.Servicios
             Tarea dato = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"{WebApiURL}/api/Tareas/{id}";
             var respuesta = await Cliente.GetAsync(url);
-
             if (respuesta.StatusCode == HttpStatusCode.OK)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<Tarea>(json);
             }
-
             return dato;
         }
 
         public static async Task<Tarea> AddTarea(Tarea info)
         {
             Tarea dato = null;
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/Tareas/";
             var jsonContent = JsonConvert.SerializeObject(info);
             var respuesta = await Cliente.PostAsync(url, new StringContent(jsonContent.ToString(), Encoding.UTF8, "application/json"));
-
             //if (respuesta.StatusCode == HttpStatusCode.Created)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<Tarea>(json);
             }
-
             return dato;
         }
 
         public static async Task<Tarea> UpdateTarea(Tarea info)
         {
             Tarea dato = null;
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/Tareas/{info.Id}";
             var jsonContent = JsonConvert.SerializeObject(info);
             var respuesta = await Cliente.PutAsync(url, new StringContent(jsonContent.ToString(), Encoding.UTF8, "application/json"));
-
             //if (respuesta.StatusCode == HttpStatusCode.Created)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<Tarea>(json);
             }
-
             return dato;
         }
 
         public static async Task<bool> DeleteTarea(int id)
         {
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/Tareas/{id}";
             var respuesta = await Cliente.DeleteAsync(url);
             return respuesta.IsSuccessStatusCode;
@@ -202,16 +182,13 @@ namespace ProfesorApp.Servicios
             List<TareaAlumno> datos = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"{WebApiURL}/api/TareaAlumnos/GetTareaAlumnosByEval/{evaluado}";
             var respuesta = await Cliente.GetAsync(url);
-
             if (respuesta.StatusCode == HttpStatusCode.OK)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 datos = JsonConvert.DeserializeObject<List<TareaAlumno>>(json);
             }
-
             return datos;
         }
 
@@ -220,65 +197,52 @@ namespace ProfesorApp.Servicios
             TareaAlumno dato = null;
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"{WebApiURL}/api/TareaAlumnos/{idTarea}/{idAlumno}";
             var respuesta = await Cliente.GetAsync(url);
-
             if (respuesta.StatusCode == HttpStatusCode.OK)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<TareaAlumno>(json);
             }
-
             return dato;
         }
 
         public static async Task<TareaAlumno> AddTareaAlumno(TareaAlumno info)
         {
             TareaAlumno dato = null;
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/TareaAlumnos/";
             var jsonContent = JsonConvert.SerializeObject(info);
             var respuesta = await Cliente.PostAsync(url, new StringContent(jsonContent.ToString(), Encoding.UTF8, "application/json"));
-
             //if (respuesta.StatusCode == HttpStatusCode.Created)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<TareaAlumno>(json);
             }
-
             return dato;
         }
 
         public static async Task<TareaAlumno> UpdateTareaAlumno(TareaAlumno info)
         {
             TareaAlumno dato = null;
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/TareaAlumnos/{info.IdTarea}/{info.IdAlumno}";
             var jsonContent = JsonConvert.SerializeObject(info);
             var respuesta = await Cliente.PutAsync(url, new StringContent(jsonContent.ToString(), Encoding.UTF8, "application/json"));
-
             //if (respuesta.StatusCode == HttpStatusCode.Created)
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<TareaAlumno>(json);
             }
-
             return dato;
         }
 
         public static async Task<bool> DeleteTareaAlumno(int idTarea, int idAlumno)
         {
-            Cliente.BaseAddress = new Uri(WebApiURL);
             Cliente.DefaultRequestHeaders.Accept.Clear();
             Cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var url = $"/api/TareaAlumnos/{idTarea}/{idAlumno}";
             var respuesta = await Cliente.DeleteAsync(url);
             return respuesta.IsSuccessStatusCode;
