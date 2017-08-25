@@ -18,9 +18,9 @@
     </StackLayout>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Archivo" Text="Archivo" Order="Primary" Priority="0" Clicked="Archivo_Clicked"/>
+        <ToolbarItem x:Name="Archivo" Text="Subir" Order="Primary" Priority="0" Clicked="Archivo_Clicked"/>
         <ToolbarItem x:Name="Guardar" Text="Guardar" Order="Primary" Priority="1" Clicked="Guardar_Clicked"/>
         <ToolbarItem x:Name="Eliminar" Text="Eliminar" Order="Primary" Priority="2" Clicked="Eliminar_Clicked"/>
-        <ToolbarItem x:Name="Ver" Text="Archivo" Order="Primary" Priority="3" Clicked="Ver_Clicked"/>
+        <ToolbarItem x:Name="Ver" Text="Ver" Order="Primary" Priority="3" Clicked="Ver_Clicked"/>
     </ContentPage.ToolbarItems>
 </ContentPage>
