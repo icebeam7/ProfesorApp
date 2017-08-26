@@ -8,7 +8,12 @@
             <ListView x:Name="lsvAlumnos" ItemSelected="lsvAlumnos_ItemSelected" Style="{StaticResource Lista}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell ImageSource="{Binding FotoURLSAS}" Text="{Binding Nombre}" TextColor="Blue"/>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Style="{StaticResource FotoAlumno}" Source="{Binding FotoURLSAS}"/>
+                                <Label Style="{StaticResource LabelNormal}" Text="{Binding Nombre}"/>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

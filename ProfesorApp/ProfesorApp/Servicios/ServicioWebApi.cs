@@ -54,6 +54,7 @@ namespace ProfesorApp.Servicios
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<Alumno>(json);
+                dato.FotoURLSAS = new ServicioStorage().GetFullDownloadAlumnoURL(dato.Id);
             }
 
             return dato;
@@ -203,6 +204,7 @@ namespace ProfesorApp.Servicios
             {
                 var json = await respuesta.Content.ReadAsStringAsync();
                 dato = JsonConvert.DeserializeObject<TareaAlumno>(json);
+                dato.Alumno.FotoURLSAS = new ServicioStorage().GetFullDownloadAlumnoURL(idAlumno);
             }
             return dato;
         }

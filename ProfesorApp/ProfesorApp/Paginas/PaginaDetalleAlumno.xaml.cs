@@ -16,10 +16,8 @@ namespace ProfesorApp.Paginas
             InitializeComponent();
 
             ActualizarActivityIndicator(true);
-
             this.dato = dato;
             this.BindingContext = dato;
-
             ActualizarActivityIndicator(false);
         }
 
@@ -35,13 +33,9 @@ namespace ProfesorApp.Paginas
             ActualizarActivityIndicator(true);
 
             if (dato.Id == 0)
-            {
                 dato = await ServicioWebApi.AddAlumno(dato);
-            }
             else
-            {
                 await ServicioWebApi.UpdateAlumno(dato);
-            }
 
             ActualizarActivityIndicator(false);
 
